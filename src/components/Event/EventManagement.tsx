@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import { Calendar, Plus, Edit, Trash2, Users, Trophy, Save, X, AlertCircle } from 'lucide-react';
 import { useData } from '../../context/DataContext';
-
-interface EventFormData {
-  name: string;
-  category: string;
-  gender: 'male' | 'female' | 'mixed';
-  startDate: string;
-  endDate: string;
-  maxTeams: number;
-}
+import { EventFormData, Event } from '../../types';
 
 const EventManagement: React.FC = () => {
   const { events, teams, addEvent } = useData();
   const [showForm, setShowForm] = useState(false);
-  const [editingEvent, setEditingEvent] = useState<any>(null);
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [formData, setFormData] = useState<EventFormData>({
     name: '',
     category: '',
@@ -26,7 +18,7 @@ const EventManagement: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const categories = [
+  const categories: string[] = [
     'U17 Boys',
     'U17 Girls',
     'U19 Boys',
@@ -85,7 +77,7 @@ const EventManagement: React.FC = () => {
     setLoading(false);
   };
 
-  const handleEdit = (event: any) => {
+  const handleEdit = (event: Event) => {
     setEditingEvent(event);
     setFormData({
       name: event.name,
@@ -112,7 +104,7 @@ const EventManagement: React.FC = () => {
     setError('');
   };
 
-  const getRegisteredTeamsCount = (eventId: string) => {
+  const getRegisteredTeamsCount = (eventId: string): number => {
     return teams.filter(team => team.eventId === eventId).length;
   };
 

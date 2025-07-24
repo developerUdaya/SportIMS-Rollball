@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Plus, Save, Trophy, Users, AlertCircle } from 'lucide-react';
 import { useData } from '../../context/DataContext';
-
-interface MatchFormData {
-  team1Id: string;
-  team2Id: string;
-  date: string;
-  time: string;
-  venue: string;
-  stage: 'group' | 'quarterfinal' | 'semifinal' | 'final';
-}
+import { MatchFormData, Event, Group, Team, Match } from '../../types';
 
 const MatchScheduling: React.FC = () => {
   const { events, teams, groups, matches, addMatch, updateMatch } = useData();
@@ -27,12 +19,12 @@ const MatchScheduling: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const selectedEvent = events.find(e => e.id === selectedEventId);
-  const eventGroups = groups.filter(group => group.eventId === selectedEventId);
-  const selectedGroup = groups.find(g => g.id === selectedGroupId);
-  const groupTeams = selectedGroup ? teams.filter(team => selectedGroup.teams.includes(team.id)) : [];
-  const eventMatches = matches.filter(match => match.eventId === selectedEventId);
-  const groupMatches = selectedGroupId ? eventMatches.filter(match => match.groupId === selectedGroupId) : [];
+  const selectedEvent: Event | undefined = events.find(e => e.id === selectedEventId);
+  const eventGroups: Group[] = groups.filter(group => group.eventId === selectedEventId);
+  const selectedGroup: Group | undefined = groups.find(g => g.id === selectedGroupId);
+  const groupTeams: Team[] = selectedGroup ? teams.filter(team => selectedGroup.teams.includes(team.id)) : [];
+  const eventMatches: Match[] = matches.filter(match => match.eventId === selectedEventId);
+  const groupMatches: Match[] = selectedGroupId ? eventMatches.filter(match => match.groupId === selectedGroupId) : [];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -48,10 +40,10 @@ const MatchScheduling: React.FC = () => {
       return;
     }
 
-    const matches = [];
+    const newMatches: Omit<Match, 'id'>[] = [];
     for (let i = 0; i < groupTeams.length; i++) {
       for (let j = i + 1; j < groupTeams.length; j++) {
-        matches.push({
+        newMatches.push({
           team1Id: groupTeams[i].id,
           team2Id: groupTeams[j].id,
           eventId: selectedEventId,
@@ -65,7 +57,7 @@ const MatchScheduling: React.FC = () => {
     }
 
     // Add all matches
-    matches.forEach(match => addMatch(match));
+    newMatches.forEach(match => addMatch(match));
     setError('');
   };
 
@@ -82,7 +74,7 @@ const MatchScheduling: React.FC = () => {
       }
 
       // Check if match already exists
-      const existingMatch = groupMatches.find(match => 
+      const existingMatch: Match | undefined = groupMatches.find(match => 
         (match.team1Id === formData.team1Id && match.team2Id === formData.team2Id) ||
         (match.team1Id === formData.team2Id && match.team2Id === formData.team1Id)
       );
@@ -117,7 +109,7 @@ const MatchScheduling: React.FC = () => {
   };
 
   const handleResultUpdate = (matchId: string, team1Sets: number, team2Sets: number) => {
-    const match = matches.find(m => m.id === matchId);
+    const match: Match | undefined = matches.find(m => m.id === matchId);
     if (!match) return;
 
     const winnerId = team1Sets > team2Sets ? match.team1Id : match.team2Id;

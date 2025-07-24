@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Wallet as Rollball, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { User } from '../../types';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -40,13 +41,14 @@ const Login: React.FC = () => {
         </div>
 
         {/* Demo Credentials */}
-        {/* <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <h3 className="font-semibold text-blue-800 mb-2">Demo Credentials:</h3>
           <div className="text-sm text-blue-700 space-y-1">
             <p><strong>Admin:</strong> admin@Rollball.com / admin123</p>
-            <p><strong>Team:</strong> Register a new team first</p>
+            <p><strong>Team:</strong> mumbai.warriors@email.com / team123</p>
+            <p><strong>Team:</strong> delhi.dynamos@email.com / team123</p>
           </div>
-        </div> */}
+        </div>
 
         {/* Login Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

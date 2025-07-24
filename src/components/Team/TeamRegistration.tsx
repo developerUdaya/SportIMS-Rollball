@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { User, Mail, Phone, MapPin, Save, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
+import { TeamFormData, Team } from '../../types';
 
 const TeamRegistration: React.FC = () => {
   const { user } = useAuth();
   const { teams, addTeam } = useData();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<TeamFormData>({
     teamName: '',
     coachName: '',
     district: '',
@@ -18,7 +19,7 @@ const TeamRegistration: React.FC = () => {
   const [error, setError] = useState('');
 
   // Check if user already has a team registered
-  const existingTeam = teams.find(team => team.email === user?.email);
+  const existingTeam: Team | undefined = teams.find(team => team.email === user?.email);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -41,7 +42,7 @@ const TeamRegistration: React.FC = () => {
       }
 
       // Add team
-      const teamData = {
+      const teamData: Omit<Team, 'id' | 'createdAt'> = {
         ...formData,
         password: 'team123' // Default password for demo
       };

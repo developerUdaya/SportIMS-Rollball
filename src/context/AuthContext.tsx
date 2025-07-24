@@ -1,20 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: 'admin' | 'team_manager';
-  teamId?: string;
-}
-
-interface AuthContextType {
-  user: User | null;
-  isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (userData: any) => Promise<boolean>;
-  logout: () => void;
-}
+import { User, AuthContextType, Team } from '../types';
+import { mockTeams } from '../data/mockData';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -54,7 +40,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     
     // Check for team managers (mock data)
-    const teams = JSON.parse(localStorage.getItem('teams') || '[]');
+    const storedTeams = JSON.parse(localStorage.getItem('teams') || '[]');
+    const teams = storedTeams.length > 0 ? storedTeams : mockTeams;
     const team = teams.find((t: any) => t.email === email);
     if (team) {
       // For demo purposes, accept any password or use default
@@ -77,10 +64,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return false;
   };
 
-  const register = async (userData: any): Promise<boolean> => {
+  const register = async (userData: Omit<Team, 'id' | 'createdAt'>): Promise<boolean> => {
     // Mock registration - in real app, this would be an API call
-    const teams = JSON.parse(localStorage.getItem('teams') || '[]');
-    const newTeam = {
+    const storedTeams = JSON.parse(localStorage.getItem('teams') || '[]');
+    const teams = storedTeams.length > 0 ? storedTeams : mockTeams;
+    const newTeam: Team = {
       id: Date.now().toString(),
       ...userData,
       createdAt: new Date().toISOString()

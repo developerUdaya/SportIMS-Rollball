@@ -2,21 +2,13 @@ import React, { useState } from 'react';
 import { User, Plus, Edit, Trash2, Camera, Save, X, Calendar, Hash, UserCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
-
-interface PlayerFormData {
-  name: string;
-  dob: string;
-  role: string;
-  jerseyNumber: number;
-  photo?: string;
-  aadhar?: string;
-}
+import { PlayerFormData, Team, Player } from '../../types';
 
 const PlayerManagement: React.FC = () => {
   const { user } = useAuth();
   const { players, teams, addPlayer } = useData();
   const [showForm, setShowForm] = useState(false);
-  const [editingPlayer, setEditingPlayer] = useState<any>(null);
+  const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
   const [formData, setFormData] = useState<PlayerFormData>({
     name: '',
     dob: '',
@@ -28,10 +20,10 @@ const PlayerManagement: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const userTeam = teams.find(team => team.email === user?.email);
-  const teamPlayers = players.filter(player => player.teamId === userTeam?.id);
+  const userTeam: Team | undefined = teams.find(team => team.email === user?.email);
+  const teamPlayers: Player[] = players.filter(player => player.teamId === userTeam?.id);
 
-  const playerRoles = [
+  const playerRoles: string[] = [
     'Spiker',
     'Libero',
     'Setter',
@@ -69,7 +61,7 @@ const PlayerManagement: React.FC = () => {
       }
 
       // Check jersey number uniqueness
-      const existingJersey = teamPlayers.find(p => 
+      const existingJersey: Player | undefined = teamPlayers.find(p => 
         p.jerseyNumber === formData.jerseyNumber && p.id !== editingPlayer?.id
       );
       if (existingJersey) {
@@ -102,7 +94,7 @@ const PlayerManagement: React.FC = () => {
     setLoading(false);
   };
 
-  const handleEdit = (player: any) => {
+  const handleEdit = (player: Player) => {
     setEditingPlayer(player);
     setFormData({
       name: player.name,
