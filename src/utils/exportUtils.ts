@@ -465,7 +465,7 @@ export const exportMatchesToExcel = (
     const team1 = teams.find(t => t.id === match.team1Id);
     const team2 = teams.find(t => t.id === match.team2Id);
     const group = groups.find(g => g.id === match.groupId);
-    const winner = match.result ? teams.find(t => t.id === match.result.winnerId) : null;
+    const winner = match.result ? teams.find(t => t.id === match?.result?.winnerId) : null;
 
     return {
       'Group': group?.name || 'N/A',
