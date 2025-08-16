@@ -13,6 +13,7 @@ const Header: React.FC = () => {
     { path: '/dashboard', label: 'Dashboard', roles: ['admin', 'team_manager'] },
     { path: '/team-registration', label: 'Team Registration', roles: ['team_manager'] },
     { path: '/players', label: 'Players', roles: ['team_manager'] },
+    { path: '/player-registration', label: 'Player Registration', roles: ['admin', 'team_manager'] },
     { path: '/events', label: 'Events', roles: ['admin'] },
     { path: '/teams', label: 'Teams', roles: ['admin'] },
     { path: '/groups', label: 'Groups', roles: ['admin'] },

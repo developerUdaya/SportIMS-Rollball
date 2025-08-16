@@ -6,6 +6,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import TeamRegistration from './components/Team/TeamRegistration';
 import PlayerManagement from './components/Player/PlayerManagement';
+import PlayerRegistration from './components/Player/PlayerRegistration';
 import EventManagement from './components/Event/EventManagement';
 import TeamManagement from './components/Admin/TeamManagement';
 import GroupManagement from './components/Group/GroupManagement';
@@ -39,6 +40,7 @@ function AppContent() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/team-registration" element={<TeamRegistration />} />
           <Route path="/players" element={<PlayerManagement />} />
+          <Route path="/player-registration" element={<PlayerRegistration />} />
           {user?.role === 'admin' && (
             <>
               <Route path="/events" element={<EventManagement />} />
