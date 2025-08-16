@@ -22,7 +22,15 @@ const TeamManagement: React.FC = () => {
     aadhar: '',
     aadharCertificate: '',
     birthCertificate: '',
-    irbfCertificate: ''
+    irbfCertificate: '',
+    fatherName: '',
+    address: '',
+    email: '',
+    mobile: '',
+    irbfNo: '',
+    sex: 'male',
+    schoolCollege: '',
+    district: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -81,16 +89,24 @@ const TeamManagement: React.FC = () => {
       });
 
       setPlayerFormData({
-        name: '',
-        dob: '',
-        role: '',
-        jerseyNumber: 1,
-        photo: '',
-        aadhar: '',
-        aadharCertificate: '',
-        birthCertificate: '',
-        irbfCertificate: ''
-      });
+              name: '',
+              dob: '',
+              role: '',
+              jerseyNumber: 1,
+              photo: '',
+              aadhar: '',
+              aadharCertificate: '',
+              birthCertificate: '',
+              irbfCertificate: '',
+              fatherName: '',
+              address: '',
+              email: '',
+              mobile: '',
+              irbfNo: '',
+              sex: 'male',
+              schoolCollege: '',
+              district: ''
+            });
       setShowPlayerForm(false);
     } catch (err) {
       setError('Failed to add player. Please try again.');
@@ -139,6 +155,138 @@ const TeamManagement: React.FC = () => {
     XLSX.writeFile(wb, `${team.teamName}_Complete_Details.xlsx`);
   };
 
+  const [modalPlayer, setModalPlayer] = useState<Player | null>(null);
+
+  // Player Details Modal
+  type PlayerDetailsModalProps = {
+    player: Player | null;
+    onClose: () => void;
+  };
+  
+  const PlayerDetailsModal: React.FC<PlayerDetailsModalProps> = ({ player, onClose }) => {
+    if (!player) return null;
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-gray-800">Player Details</h2>
+            <button
+              onClick={onClose}
+              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="p-6 space-y-4">
+            <div className="flex items-center space-x-4 mb-4">
+              {player.photo ? (
+                <img src={player.photo} alt={player.name} className="w-16 h-16 rounded-full object-cover border border-blue-200" />
+              ) : (
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                  <Users className="h-8 w-8 text-gray-400" />
+                </div>
+              )}
+              <div>
+                <h3 className="font-semibold text-gray-800 text-lg">{player.name}</h3>
+                <p className="text-sm text-gray-600">#{player.jerseyNumber} &bull; {player.role}</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">DOB:</span>
+                <span className="font-medium ml-2">{new Date(player.dob).toLocaleDateString()}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Age:</span>
+                <span className="font-medium ml-2">{new Date().getFullYear() - new Date(player.dob).getFullYear()}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Gender:</span>
+                <span className="font-medium ml-2">{player.sex}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">School/College:</span>
+                <span className="font-medium ml-2">{player.schoolCollege}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">District:</span>
+                <span className="font-medium ml-2">{player.district}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Mobile:</span>
+                <span className="font-medium ml-2">{player.mobile}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Email:</span>
+                <span className="font-medium ml-2">{player.email}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">IRBF No:</span>
+                <span className="font-medium ml-2">{player.irbfNo}</span>
+              </div>
+              <div className="sm:col-span-2">
+                <span className="text-gray-600">Address:</span>
+                <span className="font-medium ml-2">{player.address}</span>
+              </div>
+              <div className="sm:col-span-2">
+                <span className="text-gray-600">Aadhar Number:</span>
+                <span className="font-medium ml-2">{player.aadhar}</span>
+              </div>
+            </div>
+            <div className="flex gap-2 mt-4 flex-wrap">
+              {player.aadharCertificate && (
+                <button
+                  type="button"
+                  title="View Aadhar Certificate"
+                  onClick={() => window.open(player.aadharCertificate, '_blank')}
+                  className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                >
+                  <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                  Aadhar
+                </button>
+              )}
+              {player.birthCertificate && (
+                <button
+                  type="button"
+                  title="View Birth Certificate"
+                  onClick={() => window.open(player.birthCertificate, '_blank')}
+                  className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                >
+                  <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                  Birth
+                </button>
+              )}
+              {player.irbfCertificate && (
+                <button
+                  type="button"
+                  title="View IRBF Certificate"
+                  onClick={() => window.open(player.irbfCertificate, '_blank')}
+                  className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                >
+                  <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                  IRBF
+                </button>
+              )}
+              {player.photo && (
+                <button
+                  type="button"
+                  title="View Photo"
+                  onClick={() => window.open(player.photo, '_blank')}
+                  className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                >
+                  <Eye className="h-4 w-4 mr-1 text-gray-600" />
+                  Photo
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
@@ -271,7 +419,7 @@ const TeamManagement: React.FC = () => {
                   View Details
                 </button>
                 
-                <button
+                {/* <button
                   onClick={() => {
                     setSelectedTeam(team);
                     setShowPlayerForm(true);
@@ -281,7 +429,7 @@ const TeamManagement: React.FC = () => {
                 >
                   <UserPlus className="h-3 w-3 mr-1" />
                   Add Player
-                </button>
+                </button> */}
                 
                 <button
                   onClick={() => exportTeamToPDFHandler(team)}
@@ -317,8 +465,17 @@ const TeamManagement: React.FC = () => {
                 <button
                   onClick={() => setSelectedTeam(null)}
                   className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="Close"
                 >
-                  <Trash2 className="h-5 w-5" />
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -377,11 +534,18 @@ const TeamManagement: React.FC = () => {
                     <div key={player.id} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-center space-x-3 mb-3">
                         {player.photo ? (
-                          <img
-                            src={player.photo}
-                            alt={player.name}
-                            className="w-12 h-12 rounded-full object-cover"
-                          />
+                          <button
+                            type="button"
+                            title="View Photo"
+                            onClick={() => window.open(player.photo, '_blank')}
+                            className="focus:outline-none"
+                          >
+                            <img
+                              src={player.photo}
+                              alt={player.name}
+                              className="w-12 h-12 rounded-full object-cover border border-blue-200"
+                            />
+                          </button>
                         ) : (
                           <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                             <Users className="h-6 w-6 text-gray-400" />
@@ -391,12 +555,20 @@ const TeamManagement: React.FC = () => {
                           <h4 className="font-semibold text-gray-800">{player.name}</h4>
                           <p className="text-sm text-gray-600">#{player.jerseyNumber}</p>
                         </div>
+                        <button
+                          type="button"
+                          title="View All Details"
+                          onClick={() => setModalPlayer(player)}
+                          className="ml-auto p-2 rounded hover:bg-gray-100"
+                        >
+                          <Eye className="h-5 w-5 text-blue-600" />
+                        </button>
                       </div>
                       <div className="space-y-1 text-sm">
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <span className="text-gray-600">Role:</span>
                           <span className="font-medium">{player.role}</span>
-                        </div>
+                        </div> */}
                         <div className="flex justify-between">
                           <span className="text-gray-600">DOB:</span>
                           <span className="font-medium">{new Date(player.dob).toLocaleDateString()}</span>
@@ -407,10 +579,85 @@ const TeamManagement: React.FC = () => {
                             {new Date().getFullYear() - new Date(player.dob).getFullYear()}
                           </span>
                         </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Gender:</span>
+                          <span className="font-medium">{player.sex}</span>
+                        </div>
+                        {/* <div className="flex justify-between">
+                          <span className="text-gray-600">School/College:</span>
+                          <span className="font-medium">{player.schoolCollege}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">District:</span>
+                          <span className="font-medium">{player.district}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Mobile:</span>
+                          <span className="font-medium">{player.mobile}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Email:</span>
+                          <span className="font-medium">{player.email}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">IRBF No:</span>
+                          <span className="font-medium">{player.irbfNo}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Address:</span>
+                          <span className="font-medium">{player.address}</span>
+                        </div> */}
+                      </div>
+                      <div className="flex gap-2 mt-3">
+                        {player.aadharCertificate && (
+                          <button
+                            type="button"
+                            title="View Aadhar Certificate"
+                            onClick={() => window.open(player.aadharCertificate, '_blank')}
+                            className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                          >
+                            <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                            Aadhar
+                          </button>
+                        )}
+                        {player.birthCertificate && (
+                          <button
+                            type="button"
+                            title="View Birth Certificate"
+                            onClick={() => window.open(player.birthCertificate, '_blank')}
+                            className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                          >
+                            <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                            Birth
+                          </button>
+                        )}
+                        {player.irbfCertificate && (
+                          <button
+                            type="button"
+                            title="View IRBF Certificate"
+                            onClick={() => window.open(player.irbfCertificate, '_blank')}
+                            className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                          >
+                            <FileText className="h-4 w-4 mr-1 text-gray-600" />
+                            IRBF
+                          </button>
+                        )}
+                        {player.photo && (
+                          <button
+                            type="button"
+                            title="View Photo"
+                            onClick={() => window.open(player.photo, '_blank')}
+                            className="flex items-center px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-xs"
+                          >
+                            <Eye className="h-4 w-4 mr-1 text-gray-600" />
+                            Photo
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
+                <PlayerDetailsModal player={modalPlayer} onClose={() => setModalPlayer(null)} />
 
                 {getTeamPlayers(selectedTeam.id).length === 0 && (
                   <div className="text-center py-8">
@@ -453,7 +700,15 @@ const TeamManagement: React.FC = () => {
                       aadhar: '',
                       aadharCertificate: '',
                       birthCertificate: '',
-                      irbfCertificate: ''
+                      irbfCertificate: '',
+                      fatherName: '',
+                      address: '',
+                      email: '',
+                      mobile: '',
+                      irbfNo: '',
+                      sex: 'male',
+                      schoolCollege: '',
+                      district: ''
                     });
                     setError('');
                   }}

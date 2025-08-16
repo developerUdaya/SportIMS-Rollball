@@ -31,12 +31,15 @@ const Login: React.FC = () => {
         <div className="text-center">
           <div className="flex justify-center mb-4">
             <div className="bg-blue-600 p-4 rounded-full">
-              <Rollball className="h-12 w-12 text-white" />
-            </div>
+<img
+              src="https://scontent.fcjb3-5.fna.fbcdn.net/v/t39.30808-1/341442169_3389581364655901_1869603287897950737_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1d2534&_nc_ohc=6ZtuvplBwJgQ7kNvwFisoSE&_nc_oc=AdlVokWCDfjDavetZF-oJCZsvhrNzKdjskNW2Y36Lmfp3JNjayA4zlHrdCytcIpg1whmfTDuL9lQ19C2ZOdNLSkb&_nc_zt=24&_nc_ht=scontent.fcjb3-5.fna&_nc_gid=8U4g7xrGwlpdKVkw4H7ywA&oh=00_AfWlnNws4zsePnNIcoY1p29ddfKz313rmpeOrlulfopulQ&oe=68A5CA79"
+              alt="Rollball Logo"
+              className="h-20 w-20 rounded-lg bg-blue-600 p-1 object-contain"
+            />            </div>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
+          <h2 className="text-3xl font-bold text-gray-900">District / State Login </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Sign in to your Rollball tournament account
+            Sign in to Rollball world
           </p>
         </div>
 

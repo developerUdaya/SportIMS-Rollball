@@ -100,10 +100,10 @@ const Dashboard: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">
-              Welcome back, {user?.name}!
+              Welcome, {user?.role === 'admin' ? 'STRBA' : user?.name?.split(' ')[0]}!
             </h1>
             <p className="text-blue-100 text-lg">
-              {isAdmin ? 'Manage your Rollball tournaments efficiently' : 'Track your team\'s tournament journey'}
+              {isAdmin ? 'State body access zone' : 'District information zone'}
             </p>
           </div>
           <div className="hidden md:block">
@@ -303,11 +303,11 @@ const Dashboard: React.FC = () => {
                       
                       <button
                         onClick={() => handleEventRegistration(event.id)}
-                        disabled={isEventFull || userPlayers.length < 6}
+                        disabled={isEventFull || userPlayers.length < 1}
                         className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                       >
                         <CalendarPlus className="h-4 w-4 mr-2" />
-                        {isEventFull ? 'Event Full' : userPlayers.length < 6 ? 'Need 6+ Players' : 'Register for Event'}
+                        {isEventFull ? 'Event Full' : userPlayers.length < 1 ? 'Add Players to proceed' : 'Register for Event'}
                       </button>
                     </div>
                   );

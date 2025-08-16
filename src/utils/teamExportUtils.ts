@@ -25,6 +25,24 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   // Page 1: Team Overview with Player Grid
 
 
+  try {
+    const imageData = await loadImageAsBase64('https://scontent-maa3-2.xx.fbcdn.net/v/t39.30808-1/341442169_3389581364655901_1869603287897950737_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1d2534&_nc_ohc=6ZtuvplBwJgQ7kNvwEMfKef&_nc_oc=Admpawe9-LNPAx7XCbh8hNWUm5DXfoaUZm35JovCtuzOqF90guBqhlRxLYnPnl2Ca_Ihmf4q1vm8FxjyZ_t7yLuL&_nc_zt=24&_nc_ht=scontent-maa3-2.xx&_nc_gid=9lqx3Xa3R2jNWsON8hzk7w&oh=00_AfWt8V_lyIotMEAfwhjYtj-fa1lnLKHINrTzqURkmBzM4w&oe=68A5CA79');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 10, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
+
+
+  try {
+    const imageData = await loadImageAsBase64('https://bogywxggsrjbdyowtndd.supabase.co/storage/v1/object/public/player-images/players/bb7726ec-1302-4fac-9003-a082ca35656a-1755323188828.png');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 170, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
 
   // === HEADER ===
   doc.setFontSize(16);
@@ -150,6 +168,26 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   // Page 2: Players Table
 
   doc.addPage();
+
+
+  try {
+    const imageData = await loadImageAsBase64('https://scontent-maa3-2.xx.fbcdn.net/v/t39.30808-1/341442169_3389581364655901_1869603287897950737_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1d2534&_nc_ohc=6ZtuvplBwJgQ7kNvwEMfKef&_nc_oc=Admpawe9-LNPAx7XCbh8hNWUm5DXfoaUZm35JovCtuzOqF90guBqhlRxLYnPnl2Ca_Ihmf4q1vm8FxjyZ_t7yLuL&_nc_zt=24&_nc_ht=scontent-maa3-2.xx&_nc_gid=9lqx3Xa3R2jNWsON8hzk7w&oh=00_AfWt8V_lyIotMEAfwhjYtj-fa1lnLKHINrTzqURkmBzM4w&oe=68A5CA79');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 10, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
+
+
+  try {
+    const imageData = await loadImageAsBase64('https://bogywxggsrjbdyowtndd.supabase.co/storage/v1/object/public/player-images/players/bb7726ec-1302-4fac-9003-a082ca35656a-1755323188828.png');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 170, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
 
   // ===== HEADER =====
   doc.setFontSize(18);
@@ -279,6 +317,8 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
 
     doc.addPage();
 
+
+
   // ===== HEADER =====
   doc.setFillColor(0, 174, 239); // blue background
   doc.rect(0, 0, 210, 45, "F");
@@ -310,6 +350,26 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
     { align: "center" }
   );
 
+
+  try {
+    const imageData = await loadImageAsBase64('https://scontent-maa3-2.xx.fbcdn.net/v/t39.30808-1/341442169_3389581364655901_1869603287897950737_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1d2534&_nc_ohc=6ZtuvplBwJgQ7kNvwEMfKef&_nc_oc=Admpawe9-LNPAx7XCbh8hNWUm5DXfoaUZm35JovCtuzOqF90guBqhlRxLYnPnl2Ca_Ihmf4q1vm8FxjyZ_t7yLuL&_nc_zt=24&_nc_ht=scontent-maa3-2.xx&_nc_gid=9lqx3Xa3R2jNWsON8hzk7w&oh=00_AfWt8V_lyIotMEAfwhjYtj-fa1lnLKHINrTzqURkmBzM4w&oe=68A5CA79');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 10, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
+
+
+  try {
+    const imageData = await loadImageAsBase64('https://bogywxggsrjbdyowtndd.supabase.co/storage/v1/object/public/player-images/players/bb7726ec-1302-4fac-9003-a082ca35656a-1755323188828.png');
+    if (imageData) {
+      doc.addImage(imageData, 'JPEG', 170, 10, 25, 25);
+    }
+  } catch (error) {
+    console.error('Error adding image:', error);
+  }
+
   // ===== FORM TITLE =====
   doc.setFontSize(12);
   doc.setTextColor(255, 255, 255);
@@ -325,12 +385,12 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   // Left column X: 15, Right column X: 110
   const leftX = 15;
   const rightX = 110;
-  const labelWidth = 50;
+  const labelWidth = 30;
   const valueWidth = 45;
 
   // Row 1: Name
   doc.setFont("helvetica", "bold");
-  doc.text("Name (in Block Letters):", leftX, y);
+  doc.text("Name :", leftX, y);
   doc.setFont("helvetica", "normal");
   doc.text(`${player.name || ""}`, leftX + labelWidth, y);
 
@@ -368,7 +428,7 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   doc.text(`${player.mobile || ""}`, leftX + labelWidth, y);
 
   doc.setFont("helvetica", "bold");
-  doc.text("Sex:", rightX, y);
+  doc.text("Gender:", rightX, y);
   doc.setFont("helvetica", "normal");
   doc.text(`${player.sex || "Male / Female"}`, rightX + labelWidth, y);
 
@@ -387,7 +447,7 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   // Row 7: District (full width)
   y += 10;
   doc.setFont("helvetica", "bold");
-  doc.text("Name of the District:", leftX, y);
+  doc.text("District Name:", leftX, y);
   doc.setFont("helvetica", "normal");
   doc.text(`${team.district || ""}`, leftX + labelWidth, y);
 
@@ -423,8 +483,74 @@ export const exportTeamToPDF = async (team: Team, players: Player[]) => {
   doc.text("Signature of Coach", 15, y);
   doc.text("Signature of District Secretary", 150, y);
   doc.text("With Seal", 150, y + 5);
+  // Aadhar Certificate Page
+  if (player.aadharCertificate) {
+    doc.addPage();
+    doc.setFontSize(16);
+    doc.setTextColor(0, 102, 204);
+    doc.setFont("helvetica", "bold");
+    doc.text("Aadhar Certificate", 105, 20, { align: "center" });
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Player Name : ${player.name || ""}`, 15, 30);
+    doc.text(`Team Name : ${team.teamName || ""}`, 15, 40);
+    doc.text(`District : ${team.district || ""}`, 15, 50);
+    try {
+    const imageData = await loadImageAsBase64(player.aadharCertificate!);
+    // Fill image in the page (leaving some margin for text)
+    doc.addImage(imageData, "JPEG", 15, 60, 180, 130);
+    } catch (err) {
+    console.error("Photo load error", err);
+    }
+  }
+
+  // Birth Certificate Page
+  if (player.birthCertificate) {
+    doc.addPage();
+    doc.setFontSize(16);
+    doc.setTextColor(0, 102, 204);
+    doc.setFont("helvetica", "bold");
+    doc.text("Birth Certificate", 105, 20, { align: "center" });
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Player Name : ${player.name || ""}`, 15, 30);
+    doc.text(`Team Name : ${team.teamName || ""}`, 15, 40);
+    doc.text(`District : ${team.district || ""}`, 15, 50);
+    try {
+    const imageData = await loadImageAsBase64(player.birthCertificate!);
+    doc.addImage(imageData, "JPEG", 15, 60, 180, 130);
+    } catch (err) {
+    console.error("Photo load error", err);
+    }
+  }
+
+  // IRBF Certificate Page
+  if (player.irbfCertificate) {
+    doc.addPage();
+    doc.setFontSize(16);
+    doc.setTextColor(0, 102, 204);
+    doc.setFont("helvetica", "bold");
+    doc.text("IRBF Certificate", 105, 20, { align: "center" });
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Player Name : ${player.name || ""}`, 15, 30);
+    doc.text(`Team Name : ${team.teamName || ""}`, 15, 40);
+    doc.text(`District : ${team.district || ""}`, 15, 50);
+    try {
+    const imageData = await loadImageAsBase64(player.irbfCertificate!);
+    doc.addImage(imageData, "JPEG", 15, 60, 180, 130);
+    } catch (err) {
+    console.error("Photo load error", err);
+    }
+  }
+
 
   // SAVE PDF
+
+
 
 
   }

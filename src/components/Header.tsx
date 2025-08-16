@@ -11,11 +11,11 @@ const Header: React.FC = () => {
 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard', roles: ['admin', 'team_manager'] },
-    { path: '/team-registration', label: 'Team Registration', roles: ['team_manager'] },
     { path: '/players', label: 'Players', roles: ['team_manager'] },
+    { path: '/team-registration', label: 'District Profile', roles: ['team_manager'] },
     { path: '/events', label: 'Events', roles: ['admin'] },
     { path: '/teams', label: 'Teams', roles: ['admin'] },
-    { path: '/groups', label: 'Groups', roles: ['admin'] },
+    { path: '/groups', label: 'Pools', roles: ['admin'] },
     { path: '/matches', label: 'Matches', roles: ['admin'] },
     { path: '/knockout', label: 'Knockout', roles: ['admin'] },
     { path: '/results', label: 'Results', roles: ['admin'] }
@@ -31,9 +31,11 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/dashboard" className="flex items-center space-x-3">
-            <div className="bg-blue-600 p-2 rounded-lg">
-              <Rollball className="h-8 w-8 text-white" />
-            </div>
+            <img
+              src="https://scontent.fcjb3-5.fna.fbcdn.net/v/t39.30808-1/341442169_3389581364655901_1869603287897950737_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=110&ccb=1-7&_nc_sid=1d2534&_nc_ohc=6ZtuvplBwJgQ7kNvwFisoSE&_nc_oc=AdlVokWCDfjDavetZF-oJCZsvhrNzKdjskNW2Y36Lmfp3JNjayA4zlHrdCytcIpg1whmfTDuL9lQ19C2ZOdNLSkb&_nc_zt=24&_nc_ht=scontent.fcjb3-5.fna&_nc_gid=8U4g7xrGwlpdKVkw4H7ywA&oh=00_AfWlnNws4zsePnNIcoY1p29ddfKz313rmpeOrlulfopulQ&oe=68A5CA79"
+              alt="Rollball Logo"
+              className="h-20 w-20 rounded-lg bg-blue-600 p-1 object-contain"
+            />
             <div>
               <h1 className="text-xl font-bold text-gray-800">Rollball Tournament</h1>
               <p className="text-sm text-gray-600">Management System</p>

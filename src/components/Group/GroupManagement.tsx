@@ -168,7 +168,7 @@ const GroupManagement: React.FC = () => {
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Group Management</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">Pool Management</h1>
             <p className="text-gray-600">Organize teams into groups for tournament play</p>
           </div>
           {selectedEventId && eventGroups.length > 0 && (

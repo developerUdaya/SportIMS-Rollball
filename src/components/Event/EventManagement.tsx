@@ -21,14 +21,11 @@ const EventManagement: React.FC = () => {
   const [error, setError] = useState('');
 
   const categories: string[] = [
-    'U17 Boys',
-    'U17 Girls',
-    'U19 Boys',
-    'U19 Girls',
-    'Senior Men',
-    'Senior Women',
-    'Veterans',
-    'Mixed Doubles'
+    'UNDER 9',
+    'UNDER 11',
+    'UNDER 14',
+    'UNDER 17',
+    'ABOVE 17'
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -212,7 +209,7 @@ const EventManagement: React.FC = () => {
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="mixed">Mixed</option>
+                  {/* <option value="mixed">Mixed</option> */}
                 </select>
               </div>
 

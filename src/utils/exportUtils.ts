@@ -361,10 +361,22 @@ export const exportGroupTeamsToExcel = (
         'Team': team.teamName,
         'Jersey Number': player.jerseyNumber,
         'Player Name': player.name,
+        'Father Name': player.fatherName,
         'Date of Birth': player.dob,
         'Age': new Date().getFullYear() - new Date(player.dob).getFullYear(),
         'Role': player.role,
-        'Photo URL': player.photo || 'No photo'
+        'Gender': player.sex,
+        'School/College': player.schoolCollege,
+        'District': player.district,
+        'Address': player.address,
+        'Email': player.email,
+        'Mobile': player.mobile,
+        'IRBF No': player.irbfNo,
+        'Photo URL': player.photo || 'No photo',
+        'Aadhar': player.aadhar || '',
+        'Aadhar Certificate': player.aadharCertificate || '',
+        'Birth Certificate': player.birthCertificate || '',
+        'IRBF Certificate': player.irbfCertificate || ''
       });
     });
   });

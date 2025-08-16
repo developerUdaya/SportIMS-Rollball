@@ -226,13 +226,13 @@ const MatchScheduling: React.FC = () => {
               {selectedGroup?.name} Matches
             </h2>
             <div className="flex space-x-3">
-              <button
+              {/* <button
                 onClick={generateRoundRobinMatches}
                 className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
               >
                 <Trophy className="h-5 w-5 mr-2" />
                 Generate Round Robin
-              </button>
+              </button> */}
               <button
                 onClick={() => setShowForm(true)}
                 className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -364,13 +364,13 @@ const MatchScheduling: React.FC = () => {
               <div className="text-center py-8">
                 <Trophy className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500 mb-4">No matches scheduled yet</p>
-                <button
+                {/* <button
                   onClick={generateRoundRobinMatches}
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Trophy className="h-5 w-5 mr-2" />
                   Generate Round Robin Matches
-                </button>
+                </button> */}
               </div>
             ) : (
               groupMatches.map((match) => {

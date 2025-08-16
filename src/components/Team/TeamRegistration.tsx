@@ -72,27 +72,39 @@ const TeamRegistration: React.FC = () => {
             <div className="bg-green-100 p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
               <User className="h-8 w-8 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Team Already Registered</h2>
-            <p className="text-gray-600">Your team information is already in the system.</p>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">District Profile</h2>
+            {/* <p className="text-gray-600">Your team information is already in the system.</p> */}
           </div>
 
           <div className="bg-gray-50 rounded-lg p-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Team Name</label>
-                <p className="text-gray-900 font-semibold">{existingTeam.teamName}</p>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Team Name</label>
+              <p className="text-gray-900 font-semibold">{existingTeam.teamName}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Coach Name</label>
-                <p className="text-gray-900">{existingTeam.coachName}</p>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Coach Name</label>
+              <p className="text-gray-900">{existingTeam.coachName}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
-                <p className="text-gray-900">{existingTeam.district}</p>
+              <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
+              <p className="text-gray-900">{existingTeam.district}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Mobile</label>
-                <p className="text-gray-900">{existingTeam.mobile}</p>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Mobile</label>
+              <p className="text-gray-900">{existingTeam.mobile}</p>
+              </div>
+              <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <p className="text-gray-900">{existingTeam.email}</p>
+              </div>
+              <div>
+              {/* <label className="block text-sm font-medium text-gray-700 mb-1">Created At</label>
+              <p className="text-gray-900">{existingTeam.createdAt ? new Date(existingTeam.createdAt).toLocaleString() : '-'}</p>
+              </div>
+              <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Team ID</label>
+              <p className="text-gray-900">{existingTeam.id || '-'}</p> */}
               </div>
             </div>
           </div>
